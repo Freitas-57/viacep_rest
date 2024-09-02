@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisição API</title>
+    <style>
+        input {
+            margin-bottom: 10px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <h1> Aquisição de CEP</h1>
+    Cep: <input type="text" id="cep" />
+    <button type="button" id="btnBuscar">buscar</button>
+    <div>
+        <pre id="content"></pre>
+    </div>
+
+    <div>
+        <label for="">Endereço:</label>
+        <input type="text" id="logradouro">
+    </div>
+    <div>
+        <label for="">Bairro:</label>
+        <input type="text" id="bairro">
+    </div>
+    <div>
+        <label for="">Cidade:</label>
+        <input type="text" id="localidade">
+    </div>
+    <div>
+        <label for="">Estado:</label>
+        <input type="text" id="uf">
+    </div>
+
+    <script> 
+       btnBuscar.onclick = async () => {
+            let value = cep.value;
+
+            const result =  await( await fetch(`https://viacep.com.br/ws/${value}/json/`)).json(); 
+            
+            logradouro.value=result.logradouro;
+            bairro.value=result.bairro;
+            localidade.value=result.localidade;
+            uf.value=result.uf;
+
+
+        }    
+
+    </script>
+    
+</body>
+</html>
